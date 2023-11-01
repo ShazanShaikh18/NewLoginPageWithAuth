@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/Screens/get_api_screen.dart';
 import 'package:flutter_app1/Screens/login_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -24,31 +24,37 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: Text('Home Screen'),
+      ),
       backgroundColor: Colors.teal.shade100,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      drawer: Drawer(
+        child: DrawerHeader(
+            child: ListView(
           children: [
-            const Text(
-              "Logged In As: ",
-              style: TextStyle(fontSize: 18),
+            UserAccountsDrawerHeader(
+              accountName: Text(
+                user.displayName != null
+                    ? '${user.displayName}'
+                    : '${user.phoneNumber}',
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              accountEmail: Text(
+                user.email != null ? '${user.email}' : '${user.phoneNumber}',
+                style:
+                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(user.photoURL.toString()),
+              ),
+              currentAccountPictureSize: Size.fromRadius(35),
             ),
-            const SizedBox(height: 10),
-            // Text(
-            //   '${user.email}',
-            //   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            // ),
-            Text(
-              user.email != null ? '${user.email}' : '${user.phoneNumber}',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            // Text(
-            //   '${user.phoneNumber}',
-            //   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            // ),
-            const SizedBox(height: 30),
-            ElevatedButton.icon(
+            Divider(thickness: 1, color: Colors.black),
+            ListTile(
+              leading: TextButton.icon(
                 icon: const Icon(Icons.logout),
                 onPressed: () async {
                   await FirebaseAuth.instance.signOut().then((value) async {
@@ -71,11 +77,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 label: const Text(
                   'Log Out',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                )),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            )
           ],
-        ),
+        )),
       ),
+      body: GetApiScreen(),
     );
   }
 }

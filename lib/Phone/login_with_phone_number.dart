@@ -41,7 +41,7 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                 height: 50,
               ),
               IntlPhoneField(
-                disableLengthCheck: true,
+                //disableLengthCheck: true,
                 controller: phoneNumberController,
                 initialCountryCode: 'IN',
                 decoration: const InputDecoration(
@@ -115,9 +115,6 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
               GestureDetector(
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   SnackBar(content: Text('Processing...')),
-                    // );
                     showDialog(
                       context: context,
                       builder: (context) {

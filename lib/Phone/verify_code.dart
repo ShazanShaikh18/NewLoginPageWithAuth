@@ -131,7 +131,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                   try {
                     await auth.signInWithCredential(credential);
 
-                    Navigator.pop(context);
+                    //Navigator.pop(context);
                     // ignore: use_build_context_synchronously
                     Navigator.push(
                         context,

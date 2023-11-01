@@ -41,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
 
+    // try sign in with email and password
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
@@ -75,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-    // Google Authentication Code
+  // Google Authentication Code
   _handleGoogleButtonClick() {
     showDialog(
       context: context,
